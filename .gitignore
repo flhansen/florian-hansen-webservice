@@ -3,7 +3,7 @@
 #
 
 tomcat
-application.properties
+src/main/resources/application.properties
 
 #
 # Default excludes
