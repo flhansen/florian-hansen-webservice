@@ -1,9 +1,10 @@
 package com.florianhansen.webservice;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,20 +16,15 @@ public class ProjectController {
 	
 	@Autowired
 	private ProjectRepository projectRepo;
-
-	@RequestMapping("/hello")
-	public String hello() {
-		return "Hello World!";
-	}
 	
 	@RequestMapping("/projects")
-	public String projects() {
-		List<Project> projects = projectRepo.findAll();
-		List<String> projectNames = projects.stream()
-											.map(p -> p.getDescription())
-											.collect(Collectors.toList());
-
-		return String.join(", ", projectNames);
+	public List<Project> getProjects() {
+		return projectRepo.findAll();
+	}
+	
+	@GetMapping("/projects/{id}")
+	public Project getProject(@PathVariable Integer id) {
+		return projectRepo.getOne(id);
 	}
 	
 }
