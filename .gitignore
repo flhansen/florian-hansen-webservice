@@ -3,6 +3,7 @@
 #
 
 tomcat
+application.properties
 
 #
 # Default excludes
